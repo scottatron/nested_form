@@ -48,7 +48,12 @@ jQuery(function($) {
       return false;
     },
     insertFields: function(content, assoc, link) {
-      return $(content).insertBefore(link);
+      if ($('#' + assoc + '_fields_blueprint').is('table')) {
+        content = $(content).find('tr');
+        $('table#' + assoc + ' tbody').append(content);
+      } else {
+        return $(content).insertBefore(link);
+      };
     },
     removeFields: function(e) {
       var link = e.currentTarget;
